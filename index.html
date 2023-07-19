@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD 2 HTML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button id="clear">❌</button>
+        <textarea id="textarea" aria-multiline="true"></textarea>
+        <button id="submit">Submit</button>
+    </header>
+    <section id="sect"></section>
+    <script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+    <script>
+        const result = document.getElementById("sect");
+        const converter = new showdown.Converter({
+            noHeaderId: true,
+            simplifiedAutoLink: true,
+            emoji: true,
+            moreStyling: true,
+            openLinksInNewWindow: true,
+            strikethrough: true,
+            tables: true,
+            simpleLineBreaks: true,
+            underline: true,
+            splitAdjacentBlockquotes: true,
+            tasklists: true
+        });
+        const text=document.getElementById("textarea");
+        document.getElementById("submit").addEventListener("click", ()=>{
+            if(text.value){
+                result.innerHTML=converter.makeHtml(text.value)
+            }else{
+                alert("Escreva algo na area de texto")
+            }
+        })
+        document.getElementById("clear").addEventListener("click", ()=>{
+            text.value="";
+            result.innerHTML=""
+        })
+    </script>
+</body>
+</html>
